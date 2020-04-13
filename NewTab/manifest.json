@@ -12,7 +12,8 @@
     "tabs"
   ],
   "background": {
-    "page": "background.html"
+    "scripts": ["js/background.js"],
+    "persistent": false
   },
   "content_security_policy": "style-src 'self' 'unsafe-inline';script-src 'self' 'unsafe-eval' https://www.baidu.com; object-src 'self' ;",
   "manifest_version": 2

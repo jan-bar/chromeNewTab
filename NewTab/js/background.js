@@ -1,3 +1,4 @@
+/* https://chrome.google.com/webstore/detail/oficfgdfeoknbjfhommlpiekdapmnebh */
 var reopen_tab_id = null;
 var creating_tab = false;
 var activate_tab = false;
