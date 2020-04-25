@@ -33,8 +33,16 @@ var helangSearch = { /* 元素集 */
         _this.els.logo.css('background-image', 'url(img/' + _this.imagesArr[index] + '.png)');
       }
     switch_image(_this.searchIndex);
+    var len_ok = function(str) {
+        let blen = 0; /* 中文算2个字符 */
+        for (let i = str.length-1; i >= 0; i--) {
+            if ((str.charCodeAt(i) & 0xff00) != 0) blen++;
+            blen++;
+        }
+        return blen > 0 && blen < 62;
+    }
     var push_search = function(text) {
-        if (text != '') {
+        if (len_ok(text)) { /* 长度在范围内计入历史,太长显示不好看 */
           var arr = [text]; /* 最后搜索放到最前面 */
           var search = localStorage.getItem('search');
           if (typeof search == 'string') {
@@ -51,7 +59,7 @@ var helangSearch = { /* 元素集 */
       }
     var hot_click = function(arr) {
         if (arr.length <= 0) {return;}
-        var str = '';
+        let str = '';
         arr.forEach(function(item, index) {
           str += '<a class="hot-click" data-wd="'+item+'"><div class="number" style="color:'
               +_this.wordColor[index]+'">'+(index+1)+'</div><div>'+item+'</div></a>';
@@ -95,7 +103,7 @@ var helangSearch = { /* 元素集 */
       $('.hot-click').eq(tmp_select).css('background-color', '#f3f3f3');
     }
     this.els.input.keyup(function(e) {
-      var text = _this.els.input.val().trim();
+      let text = _this.els.input.val().trim();
       if (e.which == 13) {
         push_search(text);
         return false; /* 松开回车 */
@@ -120,7 +128,7 @@ var helangSearch = { /* 元素集 */
           contentType: 'application/json; charset=utf-8',
           success: function(result) {
             if (Array.isArray(result.g)) {
-              var arr = [];
+              let arr = [];
               result.g.forEach(function(item) {arr.push(item.q);});
               hot_click(arr);
             } else {
