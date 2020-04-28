@@ -55,7 +55,7 @@ var helangSearch = { /* 元素集 */
           }
           localStorage.setItem('search', JSON.stringify(arr));
         } /* 写入搜索记录,并立即搜索 */
-        window.location = _this.searchArr[_this.searchIndex] + text;
+        window.location = _this.searchArr[_this.searchIndex] + escape(text);
       }
     var hot_click = function(arr) {
         if (arr.length <= 0) {return;}
